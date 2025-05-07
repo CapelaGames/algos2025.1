@@ -1,12 +1,18 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class GridGenerator : MonoBehaviour
 {
     public Node prefab;
 
-    public int rows = 10, columns = 10;
+    private int rows = 25, columns = 25;
     public float gap = 1f;
+    
 
+    [ContextMenu("Generate Grid")]
     public void GenerateGrid()
     {
         Vector3 startPos = transform.position;
@@ -42,6 +48,20 @@ public class GridGenerator : MonoBehaviour
             }
 
             prev = null;
+        }
+    }
+
+    [ContextMenu("MAO")]
+    public void KillAllOrphan()
+    {
+        Node[] nodesInScene = FindObjectsByType<Node>(FindObjectsSortMode.None);
+
+        foreach (var orphan in nodesInScene)
+        {
+            if (orphan.Neighbours.Count == 0)
+            {
+                DestroyImmediate(orphan.gameObject);
+            }
         }
     }
 

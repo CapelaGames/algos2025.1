@@ -54,7 +54,7 @@ public class Dijkstra : MonoBehaviour
             Node current = unexplored[0];
             unexplored.RemoveAt(0);
 
-            Debug.Log(current.name);
+            //Debug.Log(current.name);
             foreach (var neighbourNode in current.Neighbours)
             {
                 if (!unexplored.Contains(neighbourNode)) continue;
@@ -75,7 +75,7 @@ public class Dijkstra : MonoBehaviour
         return false;
     }
     
-    void SetUnexplored(ref List<Node> unexplored)
+    protected void SetUnexplored(ref List<Node> unexplored)
     {
         foreach (var node in nodesInScene)
         {
